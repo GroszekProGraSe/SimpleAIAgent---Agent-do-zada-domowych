@@ -1,0 +1,30 @@
+from simple_ai_agent import HomeLabAgent
+
+# Inicjalizacja agenta
+agent = HomeLabAgent()
+
+# Przykład treningu - monitoring temperatury
+training_data = [
+    [20, 50],  # temperatura, wilgotność
+    [25, 60],
+    [30, 70],
+    [35, 80]
+]
+
+labels = [
+    "normalna",
+    "normalna",
+    "wysoka",
+    "krytyczna"
+]
+
+# Trenowanie agenta
+for data, label in zip(training_data, labels):
+    agent.learn_task("monitor_temp", data, label)
+
+# Testowanie agenta
+result = agent.perform_task([28, 65])
+print(f"Stan temperatury: {result}")
+
+# Zapisywanie wiedzy
+agent.save_knowledge("agent_knowledge.json")
